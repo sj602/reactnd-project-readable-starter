@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Main from './components/main'
 import { Route } from 'react-router-dom';
+import * as API from './utils/api';
 
 class App extends Component {
   render() {

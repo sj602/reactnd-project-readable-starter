@@ -3,6 +3,17 @@ import * as API from '../utils/api';
 import Post from './post';
 
 class Main extends Component {
+  // constructor() {
+  //   super();
+  //   this.state = {
+  //     categories: [],
+  //   };
+  // }
+
+  // componentDidMount() {
+  //   this.setState({ categories: API.getAllCategories() });
+  // }
+
   render() {
     return (
       <div>

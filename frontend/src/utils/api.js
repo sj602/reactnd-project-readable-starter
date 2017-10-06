@@ -12,8 +12,11 @@ const headers = {
 
 export const getAllCategories = () => {
   fetch(
-    `${api}/categories`, { headers } // method: 'GET'을 지우니 디버그됬음
-  ).then(response => response.json()).then(data => data.categories);
+    `${api}/categories`, { headers } // headers(O), header(X)/ method: 'GET'은 DEFAULT값.
+  ).then(response => response.json()).then(data => {
+    console.log(data.categories);
+    return data.categories;
+  });
 };
 
 export const getAllPosts = () => {
@@ -21,5 +24,6 @@ export const getAllPosts = () => {
     `${api}/posts`, { headers }
   ).then(response => response.json()).then(data => {
     console.log(data);
+    return data;
   });
 };
