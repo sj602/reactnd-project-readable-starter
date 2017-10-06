@@ -2,16 +2,14 @@ export const GET_CATEGORIES = 'GET_CATEGORIES';
 export const GET_POSTS = 'GET_POSTS';
 export const ADD_POSTS = 'ADD_POSTS';
 
-export const getCategories = categories => ({
-  type: GET_CATEGORIES,
-  categories
-});
+const getCatAction = {
+  type: GET_CATEGORIES
+};
 
-export const getPostsAction = posts => ({
-  type: GET_POSTS,
-  posts
-});
+const getPostsAction = {
+  type: GET_POSTS
+};
 
-export const addPostsAction = posts => ({
+const addPostsAction = {
   type: ADD_POSTS
-});
+};
