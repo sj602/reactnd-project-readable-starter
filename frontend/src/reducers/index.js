@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { GET_CATEGORIES, GET_POSTS, ADD_POSTS } from '../actions/actions';
+import { GET_CATEGORIES, GET_POSTS, ADD_POSTS } from '../actions';
 
 const initialState = {
   categories: [],
