@@ -12,9 +12,11 @@ class Main extends Component {
     API.getAllCategories().then(data => {
       _that.setState({ categories: data });
     });
+    console.log(this.state);
   }
 
   render() {
+    console.log(this.state);
     return (
       <div>
         <div className='menuBar'>
