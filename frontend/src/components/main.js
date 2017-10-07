@@ -8,18 +8,25 @@ class Main extends Component {
   }
 
   componentDidMount() {
-    this.setState({categories: API.getAllCategories() })
+    const _that = this;
+    API.getAllCategories().then(data => {
+      _that.setState({ categories: data });
+    });
   }
 
   render() {
     return (
       <div>
         <div className='menuBar'>
-          { API.getAllCategories() }
+          {
+            this.state.categories.map(item => {
+              <li><a href={`/category/${item.name}`}>{item.name}</a></li>
+            })
+          }
         </div>
         this is main
         <div className='posts'>
-          { API.getAllPosts() }
+
         </div>
       </div>
     )

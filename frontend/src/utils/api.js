@@ -11,10 +11,9 @@ const headers = {
 };
 
 export const getAllCategories = () => {
-  fetch(
+  return fetch(
     `${api}/categories`, { headers } // headers(O), header(X)/ method: 'GET'은 DEFAULT값.
   ).then(response => response.json()).then(data => {
-    console.log(data.categories);
     return data.categories;
   });
 };
@@ -23,7 +22,6 @@ export const getAllPosts = () => {
   fetch(
     `${api}/posts`, { headers }
   ).then(response => response.json()).then(data => {
-    console.log(data);
     return data;
   });
 };
