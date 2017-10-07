@@ -5,30 +5,36 @@ import Post from './post';
 class Main extends Component {
   state = {
     categories: [],
+    posts: [],
   }
 
   componentDidMount() {
-    const _that = this;
     API.getAllCategories().then(data => {
-      _that.setState({ categories: data });
+      this.setState({ categories: data });
     });
-    console.log(this.state);
+
+    API.getAllPosts().then(data => {
+      this.setState({ posts: data });
+    });
   }
 
   render() {
-    console.log(this.state);
     return (
       <div>
         <div className='menuBar'>
           {
-            this.state.categories.map(item => {
+            this.state.categories.map(item => // 여기서 {}를 써서 에러가 계속 났음. not {} with JSX
               <li><a href={`/category/${item.name}`}>{item.name}</a></li>
-            })
+            )
           }
         </div>
         this is main
         <div className='posts'>
-
+          {
+            this.state.posts.map(item =>
+              <li>{item}</li>
+            )
+          }
         </div>
       </div>
     )
