@@ -1,18 +1,49 @@
 import React, { Component } from 'react';
-import Main from './components/main'
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
 import * as API from './utils/api';
+import * as actions from './actions';
+
+import Main from './components/main'
+import Header from './components/header';
 
 class App extends Component {
+  constructor(props){
+    super(props);
+    this.fetchCategories();
+    this.fetchPosts();
+  }
+
+  fetchCategories(){
+    API.fetchCategories().then(categories => {
+      this.props.loadCategories({type:actions.LOAD_CATEGORIES, categories});
+    });
+  }
+
+  fetchPost(){
+    API.fetchPosts().then(posts => {
+      this.props.loadPosts({type:actions.LOAD_POSTS, posts});
+    });
+  }
+
   render() {
     return (
       <div className="App">
-        <Route exact path="/" render={() => ( // '(' 대신에 '{' 썻더니 에러났었음. return 다음에 (가 오는 원리인듯.
-          <Main />
-        )} />
+        <Header />
+        <Switch>
+          <Route exact path="/" component={Main} />
+        </Switch>
       </div>
     );
   }
+
 }
 
-export default App;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loadCategories: (categories) => dispatch(actions.LOAD_CATEGORIES(categories)),
+    loadPosts: (posts) => dispatch(actions.LOAD_POSTS(posts)),
+  };
+};
+
+export default connect(mapDispatchToProps)(App);

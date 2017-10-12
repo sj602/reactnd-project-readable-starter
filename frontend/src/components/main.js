@@ -1,44 +1,36 @@
 import React, { Component } from 'react';
 import * as API from '../utils/api';
 import Post from './post';
+import { connect } from 'react-redux';
+import { getSortedPostsArray } from '../utils/helpers';
 
 class Main extends Component {
-  state = {
-    categories: [],
-    posts: [],
-  }
-
-  componentDidMount() {
-    API.getAllCategories().then(data => {
-      this.setState({ categories: data });
-    });
-
-    API.getAllPosts().then(data => {
-      this.setState({ posts: data });
-    });
-  }
-
   render() {
+    const { posts } = this.props;
+    const { sorting } = this.props.preferences;
+    const postsArray = getSortedPostsArray(posts, sorting);
+
     return (
       <div>
-        <div className='menuBar'>
-          {
-            this.state.categories.map(item => // 여기서 {}를 써서 에러가 계속 났음. not {} with JSX
-              <li><a href={`/category/${item.name}`}>{item.name}</a></li>
-            )
-          }
-        </div>
-        this is main
-        <div className='posts'>
-          {
-            this.state.posts.map(item =>
-              <li>{item}</li>
-            )
-          }
+        <div className='allPosts'>
+          <h1>ALL POSTS</h1>
+          <ol>
+            { postsArray.map((post) => (<Post key={post.id} post={post} />)) }
+          </ol>
+          <div className='addPostContainer'>
+            <h3>Add new post</h3>
+          </div>
         </div>
       </div>
     )
   }
 }
 
-export default Main;
+function mapStateToProps({posts, preferences}) {
+  return {
+    posts,
+    preferences,
+  }
+}
+
+export default connect(mapStateToProps)(Main);
